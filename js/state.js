@@ -132,15 +132,24 @@ linden.state.prototype.renderHistory = function() {
 linden.state.prototype.renderHistoryItem = function(parent, item) {
   var input = document.createElement('div');
   input.classnames = 'input';
-  input.innerHTML = ('>> ' + item.input);
+  input.innerHTML = this.formatHTML('>> ' + item.input);
   parent.appendChild(input);
 
   var response = document.createElement('div');
   response.classnames = 'response';
-  response.innerHTML = (item.response);
+  response.innerHTML = this.formatHTML(item.response);
   parent.appendChild(response);
 
   item.drawn = true;
+};
+
+
+linden.state.prototype.formatHTML = function(string) {
+  // for now, just escape it
+  // todo - markdown?
+  var element = document.createElement('span');
+  element.innerText = element.textContent = string;
+  return element.innerHTML;
 };
 
 
@@ -158,7 +167,7 @@ linden.state.prototype.pop = function() {
  */
 linden.state.prototype.handleInput = function(input) {
   var response = linden.state.parseGlobal(input);
-  if (!response) {
+  if (response === null) {
     response = this.parse(input);
   }
   this.history_.push({
@@ -173,6 +182,7 @@ linden.state.prototype.handleInput = function(input) {
 
 /**
  * Any global interrupts that defeat the state-based parse
+ * A return value of null indicates that no global parse was recognized
  * @param {String} input
  * @return {?String}
  */
