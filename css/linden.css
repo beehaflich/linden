@@ -1,0 +1,71 @@
+
+/**
+ * Colors from Material palette
+ * https://material.io/guidelines/style/color.html
+ */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #263238; /* blue grey 900 */
+  color: #ECEFF1; /* blue grey 50 */
+  font-size: 24px;
+}
+
+#state {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+#history-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 2em;
+  left: 0;
+}
+#history {
+  padding-top: 0.5em;
+  padding-right: 0.5em;
+  padding-left: 0.5em;
+  padding-bottom: 0.5em;
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  font-family: monospace;
+}
+#history .input {
+  /* todo */
+}
+#history .response {
+  /* todo */
+}
+
+#input-container {
+  position: absolute;
+  height: 2em;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+#input {
+  height: 2em;
+  line-height: 2em;
+  background-color: #37474F; /* blue grey 800 */
+  border-width: 0;
+  outline-width: 0;
+  color: white;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  width: 100%;
+  font-family: monospace;
+}
+
+
+
