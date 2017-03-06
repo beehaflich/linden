@@ -17,7 +17,8 @@ linden.state.initial.prototype.parse = function(input) {
     return '';
   }
 
-  var split = input.split(' ');
+  // var split = input.split(' ');
+  var split = linden.command.parseSplit(input);
 
   var command = split[0].toLowerCase();
 
@@ -59,50 +60,7 @@ linden.state.initial.prototype.parse = function(input) {
 
 
   if (command === 'roll') {
-    if (split[1] === 'stats') {
-      var stat_totals = [];
-      for (var i = 0; i < 6; i++) {
-        var stat = [];
-        var stat_total = 0;
-        for (var j = 0; j < 4; j++) {
-          var roll = Math.ceil(Math.random() * 6)
-          stat.push(roll);
-          stat_total += roll;
-        }
-        var min = Math.min.apply(window, stat);
-        stat_totals.push(stat_total - min);
-      }
-      return stat_totals.join(', ');
-    } else if (split[1]) {
-      var number_of_dice = null;
-      var number_of_sides = null;
-      var d = split[1].split('d');
-      number_of_dice = +d[0] || 1;
-      number_of_sides = +d[1];
-      if (!number_of_dice) {
-        return 'Invalid roll syntax';
-      }
-      if (!number_of_sides) {
-        return 'Invalid roll syntax';
-      }
-      var rolls = [];
-      var total = 0;
-      var roll;
-      for (var i = 0; i < number_of_dice; i++) {
-        roll = (Math.ceil(Math.random() * number_of_sides));
-        rolls.push(roll);
-        total += roll;
-      }
-      return (
-        'Rolled ' + number_of_dice + ' ' +
-        number_of_sides + '-sided ' +
-        (number_of_dice === 1 ? 'die' : 'dice') + ': ' +
-        rolls.join(', ') +
-        ' (Total ' + total + ')'
-      );
-    } else {
-
-    }
+    return new linden.command.roll().run(split);
   }
 
   return '(not found) ' + input;

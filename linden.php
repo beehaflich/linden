@@ -45,6 +45,10 @@
   include_file('js/state.js');
   include_directory('js/state');
 
+  // command parsers
+  include_file('js/command.js');
+  include_directory('js/command');
+
   // start with an initial state - must be loaded last
   include_file('js/init.js');
 ?>
